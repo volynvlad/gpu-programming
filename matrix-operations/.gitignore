@@ -1,0 +1,52 @@
+# Build output
+build/
+out/
+bin/
+Debug/
+Release/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+compile_commands.json
+CMakeFiles/
+
+# CUDA compilation artifacts
+*.cubin
+*.ptx
+*.cudafe1.c
+*.cudafe1.stub.c
+*.cudafe2.c
+*.cudafe2.stub.c
+*.cudafe3.c
+*.cudafe3.stub.c
+*.cudafe4.c
+*.cudafe4.stub.c
+*.fatbin.c
+*.hash.cu
+*.func.desc
+*.device
+*.host.cpp
+*.stub.cu
+
+# Object files
+*.o
+*.obj
+
+# Executables
+*.exe
+a.out
+
+# CUDA cache
+.cuobj/
+
