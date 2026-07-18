@@ -49,4 +49,5 @@ a.out
 
 # CUDA cache
 .cuobj/
-
+.cache/
+*.qdstrm
