@@ -1,14 +1,14 @@
 #include "vector_add.cuh"
 #include <cuda_runtime.h>
 
-__global__ void vector_add_kernel(const float* a, const float* b, float* c, size_t n) {
+__global__ void vector_add_kernel(float* a, float* b, float* c, size_t n) {
     size_t idx = blockIdx.x * blockDim.x + threadIdx.x;
     if (idx < n) {
         c[idx] = a[idx] + b[idx];
     }
 }
 
-void run_vector_add(const float* a, const float* b, float* c, size_t n) {
+void run_vector_add(float* a, float* b, float* c, size_t n) {
     float *d_a, *d_b, *d_c;
     size_t bytes = n * sizeof(float);
 

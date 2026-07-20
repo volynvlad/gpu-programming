@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.24)
 
 # 2. Name the project and enable both C++ and CUDA languages
-project(CudaVectorAdd LANGUAGES CXX CUDA)
+project(MatrixOps LANGUAGES CXX CUDA)
 
 # 3. Target your local GPU automatically (no need to look up sm_XX numbers!)
 # If compiling for a different machine, replace "native" with "80;90" (for Ampere/Hopper)
@@ -17,17 +17,14 @@ set(CMAKE_CUDA_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CUDA_STANDARD_REQUIRED ON)
 
-# 6. Define your executable and its source files
-add_executable(vector_add 
-    src/main.cpp
-    src/vector_add.cu
-)
+# 6. Single executable: main.cpp + both CUDA sources
+add_executable(main src/main.cpp src/vector_add.cu src/matrix_mult.cu)
 
-# 7. Tell CMake where to find your .cuh header files
-target_include_directories(vector_add PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+# 7. Include directories
+target_include_directories(main PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-# 8. (Optional) Enable aggressive optimization in Release mode
-target_compile_options(vector_add PRIVATE
+# 8. Compile options (CUDA gets -O3 and fast math; C++ gets -O3)
+target_compile_options(main PRIVATE
     $<$<COMPILE_LANGUAGE:CUDA>:-O3;--use_fast_math>
     $<$<COMPILE_LANGUAGE:CXX>:-O3>
 )

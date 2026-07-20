@@ -18,7 +18,7 @@ cmake --build build -j
 Execute the compiled CUDA binary:
 
 ```Bash
-./build/vector_add
+./build/main
 ```
 # High-Speed Builds with Ninja (Optional)
 Install the Ninja build backend (Debian/Ubuntu):
@@ -41,5 +41,5 @@ cmake -B build -G Ninja
 Profile memory transfers and kernel execution times using NVIDIA Nsight Systems:
 
 ```Bash
-nsys profile --stats=true ./build/vector_add
+nsys profile --stats=true ./build/main
 ```
