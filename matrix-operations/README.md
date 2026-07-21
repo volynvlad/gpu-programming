@@ -43,3 +43,7 @@ Profile memory transfers and kernel execution times using NVIDIA Nsight Systems:
 ```Bash
 nsys profile --stats=true ./build/main
 ```
+
+```Bash
+compute-sanitizer --tool=memcheck ./build/main
+```

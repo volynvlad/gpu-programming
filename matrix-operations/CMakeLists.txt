@@ -18,7 +18,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CUDA_STANDARD_REQUIRED ON)
 
 # 6. Single executable: main.cpp + both CUDA sources
-add_executable(main src/main.cpp src/vector_add.cu src/matrix_mult.cu)
+add_executable(main src/main.cpp src/vector_add.cu src/matrix_mult.cu src/broadcasting.cu)
 
 # 7. Include directories
 target_include_directories(main PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
