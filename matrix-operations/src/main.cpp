@@ -7,7 +7,6 @@
 #include <chrono>
 
 void check_vector_add() {
-    std::cout.imbue(std::locale(""));
     size_t N = 1 << 20; // ~1 million elements
     std::vector<float> a(N, 1.0f);
     std::vector<float> b(N, 2.0f);
@@ -59,7 +58,7 @@ bool verify_broadcasting(float* a, float* b, float* c, float* res,
                               << "Expected " << expected << ", got " << res[idx_a] << std::endl;
                     return false;
                 }
-                std::cout << "Correct at [" << x << "][" << y << "][" << z << "]: " << "Expected " << expected << " and got " << res[idx_a] << std::endl;
+                // std::cout << "Correct at [" << x << "][" << y << "][" << z << "]: " << "Expected " << expected << " and got " << res[idx_a] << std::endl;
             }
         }
     }
@@ -89,6 +88,7 @@ void check_broadcast() {
 
 
 int main() {
+    std::cout.imbue(std::locale(""));
     check_broadcast();
     return 0;
 }

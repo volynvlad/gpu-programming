@@ -8,16 +8,12 @@ __global__ void broadcasting_sum(
     size_t shape_a, size_t shape_b, size_t shape_c
 ) {
     size_t idx = blockIdx.x * blockDim.x + threadIdx.x;
-    size_t row = idx / (shape_c * shape_b);
-    size_t column = (idx - row * shape_c * shape_b) / shape_b;
-    size_t width = idx % shape_b;
-    if (row < shape_a && column < shape_b && width < shape_c) 
-        for (int i(0); i < shape_b; i++) 
-            for (int j(0); j < shape_c; j++) 
-                res[shape_b * shape_c * row + shape_c * i + j] = 
-                    a[shape_b * shape_c * row + shape_c * i + j]
-                    + b[row * shape_b + j]
-                    + c[row];
+    if (idx < shape_a * shape_b * shape_c) {
+        size_t row = idx / (shape_b * shape_c);
+        size_t column = (idx / shape_c) % shape_b;
+        // for res and a don't need to compute the linear offset; just use idx
+        res[idx] = a[idx] + b[row * shape_b + column] + c[row];
+    }
 }
 
 void run_broadcasting(
@@ -40,7 +36,7 @@ void run_broadcasting(
     cudaMemcpy(d_c,   c,   bytes_c, cudaMemcpyHostToDevice);
     cudaMemcpy(d_res, res, bytes_a, cudaMemcpyHostToDevice);
 
-    size_t blocks = (shape_a + THREADS - 1) / THREADS;
+    size_t blocks = (shape_a * shape_b * shape_c + THREADS - 1) / THREADS;
     broadcasting_sum<<<blocks, THREADS>>>(d_a, d_b, d_c, d_res, shape_a, shape_b, shape_c);
 
     cudaMemcpy(res, d_res, bytes_a, cudaMemcpyDeviceToHost);
