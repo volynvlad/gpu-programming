@@ -13,12 +13,13 @@ ln -s build/compile_commands.json .
 Compile the project across all available CPU cores:
 
 ```Bash
-cmake --build build -j
+cmake -B build -S .
+cmake --build build --target matrix_operations
 ```
 Execute the compiled CUDA binary:
 
 ```Bash
-./build/main
+./build/src/matrix-operations/matrix_operations
 ```
 # High-Speed Builds with Ninja (Optional)
 Install the Ninja build backend (Debian/Ubuntu):

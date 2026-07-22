@@ -89,6 +89,7 @@ void check_broadcast() {
 
 int main() {
     std::cout.imbue(std::locale(""));
-    check_broadcast();
+    check_matmul();
+    // check_broadcast();
     return 0;
 }
